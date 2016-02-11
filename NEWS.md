@@ -1,4 +1,18 @@
-# rvest 0.2.0.9000
+# rvest 0.3.1.9000
+
+* Parse rowspans and colspans effectively by filling using repetition from 
+  left to right (for colspan) and top to bottom (rowspan) (#111)
+
+# rvest 0.3.1
+
+* Fix invalid link for SSA example.
+
+* Parse `<options>` that don't have value attribute (#85).
+
+* Remove all remaining uses of `html()` in favor of `read_html()` 
+  (@jimhester, #113).
+
+# rvest 0.3.0
 
 * rvest has been rewritten to take advantage of the new xml2 package. xml2 
   provides a fresh binding to libxml2, avoiding many of the work-arounds 
@@ -23,7 +37,11 @@
 
 * `submit_request()` (and hence `submit_form()`) is now case-insensitive, 
   and so will find `<input type=SUBMIT>` as well as`<input type="submit">`.
-
+  
+* `submit_request()` (and hence `submit_form()`) recognizes forms with 
+  `<input type="image">` as a valid form submission button per
+  <http://www.w3.org/TR/html-markup/input.image.html>
+  
 # rvest 0.2.0
 
 ## New features

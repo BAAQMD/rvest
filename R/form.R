@@ -149,11 +149,11 @@ format.select <- function(x, ...) {
 
 parse_options <- function(options) {
   parse_option <- function(option) {
-    attr <- as.list(xml2::xml_attrs(option))
+    name <- xml2::xml_text(option)
     list(
-      value = attr$value,
-      name = xml2::xml_text(option),
-      selected = !is.null(attr$selected)
+      value = xml2::xml_attr(option, "value", default = name),
+      name = name,
+      selected = xml2::xml_has_attr(option, "selected")
     )
   }
 
@@ -164,7 +164,7 @@ parse_options <- function(options) {
 
   list(
     value = value[selected],
-    options = setNames(value, name)
+    options = stats::setNames(value, name)
   )
 }
 
@@ -277,7 +277,9 @@ submit_form <- function(session, form, submit = NULL, ...) {
 }
 
 submit_request <- function(form, submit = NULL) {
-  submits <- Filter(function(x) identical(tolower(x$type), "submit"), form$fields)
+  submits <- Filter(function(x) {
+      identical(tolower(x$type), "submit") | identical(tolower(x$type), "image")
+  }, form$fields)
   if (is.null(submit)) {
     submit <- names(submits)[[1]]
     message("Submitting with '", submit, "'")

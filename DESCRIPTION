@@ -1,12 +1,12 @@
 Package: rvest
-Version: 0.2.0.9000
+Version: 0.3.1.9000
 Title: Easily Harvest (Scrape) Web Pages
-Description: Wrappers around the xml2 and httr packages to make it easy to
-    download, then manipulate, both html and xml.
-Authors@R: as.person(c(
-    'Hadley Wickham <h.wickham@gmail.com> [aut,cre]',
-    'RStudio [cph]'
-    ))
+Description: Wrappers around the 'xml2' and 'httr' packages to make it easy to
+    download, then manipulate, HTML and XML.
+Authors@R: c(
+    person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
+    person("RStudion", role = "cph")
+    )
 Depends:
     R (>= 3.0.1),
     xml2
@@ -18,7 +18,9 @@ Suggests:
     testthat,
     knitr,
     png,
-    stringi (>= 0.3.1)
+    stringi (>= 0.3.1),
+    rmarkdown
 License: GPL-3
 LazyData: true
 VignetteBuilder: knitr
+RoxygenNote: 5.0.0

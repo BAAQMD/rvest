@@ -16,7 +16,9 @@
 #' s <- html_session("http://had.co.nz")
 #' s %>% jump_to("thesis") %>% jump_to("/") %>% session_history()
 #' s %>% jump_to("thesis") %>% back() %>% session_history()
+#' \donttest{
 #' s %>% follow_link(css = "p a")
+#' }
 html_session <- function(url, ...) {
   session <- structure(
     list(
@@ -64,7 +66,7 @@ request_POST <- function(x, url, ...) {
 show <- function(x) {
   temp <- tempfile()
   writeBin(httr::content(x$response, "raw"), temp)
-  browseURL(temp)
+  utils::browseURL(temp)
 }
 
 #' @export
@@ -179,7 +181,7 @@ print.history <- function(x, ...) {
 # html methods -----------------------------------------------------------------
 
 #' @export
-html_form.session <- function(x) html_form(html(x))
+html_form.session <- function(x) html_form(xml2::read_html(x))
 
 #' @export
 html_table.session <- function(x, header = NA, trim = TRUE, fill = FALSE,
